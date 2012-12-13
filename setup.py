@@ -1,16 +1,16 @@
 from setuptools import setup, find_packages
 import os
 
+README = os.path.join(os.path.dirname(__file__), 'README.rst')
 
 setup(
     author="Ben Lopatin",
     author_email="ben.lopatin@wellfireinteractive.com",
     name='django-site-broadcasts',
-    version='0.0.1',
+    version='0.0.2',
     description='A small Django app that displays temporary, '
                 'short broadcasts across a site.',
-    long_description=open(os.path.join(os.path.dirname(__file__),
-        'README.rst')).read(),
+    long_description=open(README).read(),
     url='https://github.com/bennylope/django-site-broadcasts/',
     license='BSD License',
     platforms=['OS Independent'],
@@ -26,7 +26,11 @@ setup(
     install_requires=[
         'Django>=1.0',
     ],
+    tests_require=[
+        'Django>=1.0',
+        'django-setuptest'
+    ],
+    test_suite='setuptest.setuptest.SetupTestSuite',
     packages=find_packages(),
-    zip_safe = False
+    zip_safe=False
 )
-

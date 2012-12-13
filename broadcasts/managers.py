@@ -1,4 +1,8 @@
-from datetime import datetime
+try:
+    from django.utils.timezone import now
+except ImportError:
+    import datetime
+    now = datetime.datetime.now
 
 from django.db import models
 from django.db.models import Q
@@ -15,8 +19,10 @@ class BroadcastManager(models.Manager):
 
     def current(self):
         """Return only current and active messages"""
-        return self.active().filter(end_time__gte=datetime.now()).filter(
-            Q(Q(start_time__lte=datetime.now()) | Q(start_time=None)))
+        current_time = now()
+        return self.active().filter(end_time__gte=current_time).filter(
+            Q(start_time__lte=current_time) | Q(start_time=None)
+        )
 
     def latest(self):
         """Return the broadcast message to display"""
@@ -24,4 +30,3 @@ class BroadcastManager(models.Manager):
             return self.current().order_by("end_time")[0]
         except IndexError:
             return None
-
