@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+    <div id="messages"></div>
+    <ul>{% for item in object_list %}
+        <li><a href="{% url 'simplemodel_detail' slug=item.slug %}">{{ item }}</a></li>
+        {% empty %}
+        <li>No Items</li>
+    {% endfor %}</ul>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    function addMessage(message) {
+        $('#messages').append('<div class="alert">' + message + '</div>');
+    };
+    $.getJSON('/messages/', function(data){
+        $.each(data, function(index, value) {addMessage(value.message)});
+    });
+</script>
+{% endblock content %}
