@@ -1,41 +1,55 @@
-======================
-django-site-broadcasts
-======================
+=================
+django-broadcasts
+=================
 
-The site broadcast application allows users to define short messages and
-announcements that should be displayed across a site.
+This version of Django Site Broadcasts was forked to provide a way to schedule client-side messages:
 
-Each broadcast message consists of a short message, an optional start time, and
-a completion time, when the 
-
-should be displayed across a site
+    * Across the whole site or on specific pages
+    * For a specified amount of time
+    * Uses a cookie to mark that the message was shown
+    * For all users, authenticated users only, or unauthenticated users only
+    * Retrievable via AJAX to allow for page caching
+    * Django 1.5+ compatibility
 
 Installation
 ============
 
-Clone the repository and use the ``setup.py`` file to install the application.
+#. Use ``pip`` to install the application:
 
-    python setup.py install
+   .. code-block:: bash
 
-Then add ``broadcasts`` to your ``INSTALLED_APPS`` and
-``broadcasts.context_processors.broadcast_message`` to
-``TEMPLATE_CONTEXT_PROCESSORS``.
+      $ pip install django-site-broadcasts
+
+#. Then add ``broadcasts`` to your ``INSTALLED_APPS`` setting:
+
+   .. code-block:: python
+
+      INSTALLED_APPS = [
+          # ...
+          'broadcasts',
+      ]
+
+#. Add this line to your ``urls.py``::
+
+    url(r'^messages/', include('broadcasts.urls')),
+
 
 Usage
 =====
 
+If you have this in your HTML somewhere::
 
-If you've added the context processor to your list of context processors, you
-can simply refer to the current message using the context variable::
+    <div id="messages"></div>
 
-    {{ broadcast_message }}
+you can use this simple jQuery snippet to retrieve all available broadcasts::
 
-The message itself should be displayed with::
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+        function addMessage(message) {
+            $('#messages').append('<div class="alert">' + message + '</div>');
+        };
+        $.getJSON("{% url 'broadcast_messages' %}", function(data){
+            $.each(data, function(index, value) {addMessage(value.message)});
+        });
+    </script>
 
-    {{ broadcast_message.message }}
-
-TO-DO
-=====
-
-* Handle time zones (Django project timezone may differ from server timezone)
-* Use caching (if available)

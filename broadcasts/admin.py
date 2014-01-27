@@ -3,7 +3,6 @@ from django.utils.translation import ugettext_lazy as _
 
 from broadcasts.models import BroadcastMessage
 from broadcasts.forms import BroadcastMessageForm
-from broadcasts.settings import MESSAGE_CHOICES
 
 
 class BroadcastAdmin(admin.ModelAdmin):
@@ -30,12 +29,5 @@ class BroadcastAdmin(admin.ModelAdmin):
                       ('start_time', 'end_time'))
         })
     )
-
-    def formfield_for_dbfield(self, db_field, **kwargs):
-        print kwargs
-        fld = super(BroadcastAdmin, self).formfield_for_dbfield(db_field, **kwargs)
-        if db_field.name == 'message_type' and MESSAGE_CHOICES:
-            fld.widget.choices = MESSAGE_CHOICES
-        return fld
 
 admin.site.register(BroadcastMessage, BroadcastAdmin)

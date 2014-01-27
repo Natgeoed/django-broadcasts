@@ -167,6 +167,6 @@ LOGGING = {
     }
 }
 
-# BROADCAST_SETTINGS = {
-#     'MESSAGE_CHOICES': [('alert', 'alert'), ('success', 'success'), ('error', 'error')]
-# }
+BROADCAST_SETTINGS = {
+    'MESSAGE_TYPE_CHOICES': [('alert', 'alert'), ('success', 'success'), ('error', 'error')]
+}

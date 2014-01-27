@@ -23,9 +23,9 @@ def get_readme():
 DESC = " ".join(__import__('broadcasts').__doc__.splitlines()).strip()
 
 setup(
-    name="django-site-broadcasts",
+    name="django-broadcasts",
     version=__import__('{{app_name}}').get_version().replace(' ', '-'),
-    url='https://github.com/Natgeoed/django-site-broadcasts',
+    url='https://github.com/Natgeoed/django-broadcasts',
     author='',
     author_email='',
     description=DESC,

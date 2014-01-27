@@ -11,7 +11,7 @@
     function addMessage(message) {
         $('#messages').append('<div class="alert">' + message + '</div>');
     };
-    $.getJSON('/messages/', function(data){
+    $.getJSON("{% url 'broadcast_messages' %}", function(data){
         $.each(data, function(index, value) {addMessage(value.message)});
     });
 </script>
