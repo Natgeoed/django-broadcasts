@@ -45,7 +45,10 @@ class BroadcastMessage(models.Model):
             <code>/path/to/this.html</code> OR <code>/or/to/this.html</code>
             <br/><code>/anything/under/.*</code> matches any path starting with
             <code>/anything/under/</code>"""))
-    title = models.CharField(_("title"), max_length=50)
+    title = models.CharField(
+        _("title"),
+        max_length=50,
+        default="(No Title)")
     message = models.TextField(_("message"))
     start_time = models.DateTimeField(
         _("start time"),
