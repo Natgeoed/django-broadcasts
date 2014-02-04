@@ -1,7 +1,7 @@
 import re
 import json
 from django.http import HttpResponse
-from django.views.decorators import never_cache
+from django.views.decorators.cache import never_cache
 from .models import BroadcastMessage
 
 

@@ -136,6 +136,7 @@ INSTALLED_APPS = (
 
     'broadcasts',
     'simpleapp',
+    'south',
 )
 
 # A sample logging configuration. The only tangible logging
