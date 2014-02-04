@@ -1,6 +1,7 @@
 import re
 import json
 from django.http import HttpResponse
+from django.views.decorators import never_cache
 from .models import BroadcastMessage
 
 
@@ -20,6 +21,7 @@ def encode_excluded(exclude_set):
         return ""
 
 
+@never_cache
 def get_messages(request):
     """
     Get messages for the user
@@ -54,6 +56,7 @@ def get_messages(request):
     return response
 
 
+@never_cache
 def reset_messages(request):
     """
     reset the excluded messages
