@@ -1,8 +1,28 @@
 import re
 import json
+from functools import wraps
 from django.http import HttpResponse
-from django.views.decorators.cache import never_cache
+from django.views.decorators.cache import patch_cache_control
 from .models import BroadcastMessage
+
+
+def never_ever_cache(decorated_function):
+    """Like Django @never_cache but sets more valid cache disabling headers.
+
+    @never_cache only sets Cache-Control:max-age=0 which is not
+    enough. For example, with max-axe=0 Firefox returns cached results
+    of GET calls when it is restarted.
+
+    From http://stackoverflow.com/a/13512008
+    """
+    @wraps(decorated_function)
+    def wrapper(*args, **kwargs):
+        response = decorated_function(*args, **kwargs)
+        patch_cache_control(
+            response, no_cache=True, no_store=True, must_revalidate=True,
+            max_age=0)
+        return response
+    return wrapper
 
 
 def decode_excluded(exclude_string):
@@ -21,7 +41,7 @@ def encode_excluded(exclude_set):
         return ""
 
 
-@never_cache
+@never_ever_cache
 def get_messages(request):
     """
     Get messages for the user
@@ -56,7 +76,7 @@ def get_messages(request):
     return response
 
 
-@never_cache
+@never_ever_cache
 def reset_messages(request):
     """
     reset the excluded messages
