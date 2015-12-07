@@ -6,8 +6,8 @@ or part of a site.
 __version_info__ = {
     'major': 0,
     'minor': 6,
-    'micro': 0,
-    'releaselevel': 'beta',
+    'micro': 1,
+    'releaselevel': 'final',
     'serial': 1
 }
 

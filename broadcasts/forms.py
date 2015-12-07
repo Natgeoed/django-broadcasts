@@ -11,6 +11,7 @@ class BroadcastMessageForm(forms.ModelForm):
 
     class Meta:
         model = BroadcastMessage
+        fields = '__all__'
 
     def clean(self):
         """
