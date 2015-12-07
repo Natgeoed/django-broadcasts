@@ -19,7 +19,7 @@ class BroadcastManager(models.Manager):
         def for_auth_users(self):
             return self.exclude(user_target=self.model.TARGET_UNAUTHENTICATED)
 
-    def get_query_set(self):
+    def get_queryset(self):
         return self.BroadcastQuerySet(self.model)
 
     def active(self):
