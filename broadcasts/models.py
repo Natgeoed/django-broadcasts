@@ -44,7 +44,10 @@ class BroadcastMessage(models.Model):
             <code>/path/to/this.html|/or/to/this.html</code> matches either
             <code>/path/to/this.html</code> OR <code>/or/to/this.html</code>
             <br/><code>/anything/under/.*</code> matches any path starting with
-            <code>/anything/under/</code>"""))
+            <code>/anything/under/</code><br />
+            <code>/anything/here/?</code> matches any path starting with
+            <code>/anything/here/</code> OR <code>/anything/here</code><br />
+            ("?" makes preceding character optional)"""))
     title = models.CharField(
         _("title"),
         max_length=50,
