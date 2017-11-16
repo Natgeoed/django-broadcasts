@@ -72,7 +72,7 @@ class BroadcastMessage(models.Model):
         max_length=50,
         choices=MESSAGE_TYPE_CHOICES,
         blank=True,
-        default="")
+        default="top-banner")
     creation_date = models.DateTimeField(
         _("creation date"),
         default=timezone.now,
