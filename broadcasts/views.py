@@ -46,6 +46,7 @@ def get_messages(request):
     """
     Get messages for the user
     """
+    import urlparse
     if request.user.is_authenticated():
         msgs = BroadcastMessage.objects.current().for_auth_users()
     else:
@@ -58,9 +59,8 @@ def get_messages(request):
     msgs = msgs.exclude(pk__in=list(excluded))
 
     # filter them by the HTTP_REFERER
-    host = "https://" if request.is_secure() else "http://"
-    host += request.get_host()
-    path = request.META.get('HTTP_REFERER', '/').replace(host, "")
+    url_parts = urlparse.urlparse(request.META.get('HTTP_REFERER', '/'))
+    path = url_parts.path
     valid_messages = [msg for msg in msgs if re.match(msg.url_target, path)]
     msg_list = []
     for msg in valid_messages:
