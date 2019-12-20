@@ -84,7 +84,7 @@ class BroadcastMessage(models.Model):
         ordering = ["-end_time"]
 
     def __unicode__(self):
-        return u"%s" % self.message[:15]
+        return "%s" % self.message[:15]
 
     def msg_info(self):
         return {

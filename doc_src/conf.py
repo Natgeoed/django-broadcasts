@@ -40,8 +40,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Django Site Boradcasts'
-copyright = u'2014, National Geographic Education and others'
+project = 'Django Site Boradcasts'
+copyright = '2014, National Geographic Education and others'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -177,8 +177,8 @@ htmlhelp_basename = 'djangositebroadcastsdoc'
 latex_documents = [(
     'index',
     'app.tex',
-    u'Django Site Broadcasts Documentation',
-    u'',
+    'Django Site Broadcasts Documentation',
+    '',
     'manual'
 ), ]
 

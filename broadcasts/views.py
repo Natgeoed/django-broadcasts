@@ -27,7 +27,7 @@ def never_ever_cache(decorated_function):
 
 def decode_excluded(exclude_string):
     if exclude_string:
-        excluded = map(int, exclude_string.split(","))
+        excluded = list(map(int, exclude_string.split(",")))
         return set(excluded)
     else:
         return set()
@@ -46,7 +46,7 @@ def get_messages(request):
     """
     Get messages for the user
     """
-    import urlparse
+    import urllib.parse
     if request.user.is_authenticated():
         msgs = BroadcastMessage.objects.current().for_auth_users()
     else:
@@ -59,7 +59,7 @@ def get_messages(request):
     msgs = msgs.exclude(pk__in=list(excluded))
 
     # filter them by the HTTP_REFERER
-    url_parts = urlparse.urlparse(request.META.get('HTTP_REFERER', '/'))
+    url_parts = urllib.parse.urlparse(request.META.get('HTTP_REFERER', '/'))
     path = url_parts.path
     valid_messages = [msg for msg in msgs if re.match(msg.url_target, path)]
     msg_list = []
