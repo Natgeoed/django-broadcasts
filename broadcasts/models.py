@@ -52,7 +52,7 @@ class BroadcastMessage(models.Model):
             <br/><code>/anything/beneath/this/</code> matches any path that starts with
             <code>/anything/beneath/this/</code><br />
             <code>/anything/here/?</code> matches any path starting with
-            <code>/anything/here/</code> OR <code>/anything/here</code><br /><br />""")
+            <code>/anything/here/</code> OR <code>/anything/here</code><br /><br />"""))
     title = models.CharField(
         _("title"),
         max_length=50,
