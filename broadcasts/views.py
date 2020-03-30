@@ -47,7 +47,7 @@ def get_messages(request):
     Get messages for the user
     """
     import urllib.parse
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         msgs = BroadcastMessage.objects.current().for_auth_users()
     else:
         msgs = BroadcastMessage.objects.current().for_unauth_users()
