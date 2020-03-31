@@ -38,21 +38,16 @@ class BroadcastMessage(models.Model):
     url_target = models.TextField(
         _("url target"),
         default=".*",
-        help_text=_("""Uses regular expressions to match target URLs. <br/><br />
-            Special Characters:<br />
-            <code>"*"</code> is a wildcard, it matches anything.<br />
-            <code>"|"</code> symbolizes an "OR" condition, either this or that.<br />
-            <code>"$"</code> signifies a hard stop, matching paths must end at the "$".<br />
-            <code>"?"</code> makes preceding character optional.<br /><br />
-            Examples:<br />
+        help_text=_("""Uses regular expressions to match target URLs. <br/>
             <code>.*</code> applies to entire site. <br/>
-            <code>/path/to/this/$</code> matches that specific path only. <br/>
-            <code>/path/to/this/$|/path/to/that$</code> matches either
-            <code>/path/to/this/</code> OR <code>/path/to/that</code>
-            <br/><code>/anything/beneath/this/</code> matches any path that starts with
-            <code>/anything/beneath/this/</code><br />
+            <code>/path/to/this.html</code> matches that specific path. <br/>
+            <code>/path/to/this.html|/or/to/this.html</code> matches either
+            <code>/path/to/this.html</code> OR <code>/or/to/this.html</code>
+            <br/><code>/anything/under/.*</code> matches any path starting with
+            <code>/anything/under/</code><br />
             <code>/anything/here/?</code> matches any path starting with
-            <code>/anything/here/</code> OR <code>/anything/here</code><br /><br />"""))
+            <code>/anything/here/</code> OR <code>/anything/here</code><br />
+            ("?" makes preceding character optional)"""))
     title = models.CharField(
         _("title"),
         max_length=50,
